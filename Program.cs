@@ -54,6 +54,75 @@
     {
         return $"{Value} {Color}";
     }
+
+    public static int CheckNumberInput(int number)
+    {
+        for (int i = 0; i < 1; i++)
+        {
+            int maxSize = 7;
+            int minSize = 1;
+            try
+            {
+                number = int.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine("uncorrect input");
+                i--;
+                continue;
+            }
+            if (number > maxSize || number < minSize)
+            {
+                Console.WriteLine("uncorrect input");
+                i--;
+                continue;
+            }
+        }
+        return number;
+    }
+
+    static bool CheckLetter(char Letter)
+    {
+        string colors = "ROYGCBP";
+        int pulpe = colors.IndexOf(Letter);
+
+        if (pulpe >= 0)
+            return true;
+        else
+            return false;
+    }
+
+    public static string CheckNumLet(string cardStr)
+    {
+        for (int i = 0; i < 1; i++)
+        {
+            HintClass.Hint();
+            int maxSize = 7;
+            int minSize = 1;
+            int cardLength = 2;
+            string str = Console.ReadLine();
+            string[] strSplit = str.Split();
+
+            if (strSplit.Length != cardLength || !int.TryParse(strSplit[0], out _) || !char.TryParse(strSplit[1], out _))
+            {
+                Console.WriteLine("uncorrect input");
+                i--;
+                continue;
+            }
+
+            if (Convert.ToInt32(strSplit[0]) <= maxSize && Convert.ToInt32(strSplit[0]) >= minSize && CheckLetter(Convert.ToChar(strSplit[1].ToUpper())))
+            {
+                cardStr = str;
+            }
+            else
+            {
+                Console.WriteLine("uncorrect input");
+                i--;
+                continue;
+            }
+        }
+        return cardStr;
+    }
 }
 
 class GameHelper
@@ -80,6 +149,8 @@ class GameHelper
         else
             Console.WriteLine("It's a tie!");
     }
+
+
 }
 
 class HintClass
@@ -98,25 +169,27 @@ class Program
     static void Main()
     {
         Console.WriteLine("Enter the size of the first combination (from 1 to 7):");
-        int firstCombinationLength = int.Parse(Console.ReadLine());
-        Card[] set1 = new Card[firstCombinationLength];
+        //int firstCombinationLength = int.Parse(Console.ReadLine());
+        int firstCombLength = 0;
+        firstCombLength = Card.CheckNumberInput(firstCombLength);
+        Card[] set1 = new Card[firstCombLength];
 
         Console.WriteLine("Enter the cards of the first set. (from 1 to 7) with color (R/O/Y/G/C/B/P) of the card:");
-        HintClass.Hint();
-        for (int i = 0; i < firstCombinationLength; i++)
+        for (int i = 0; i < firstCombLength; i++)
         {
-            string cardString = Console.ReadLine();
+            string cardString = "";
+            cardString = Card.CheckNumLet(cardString);
             set1[i] = new Card(cardString);
         }
 
         Console.WriteLine("Enter the size of the second combination (from 1 to 7):");
-        int n2 = int.Parse(Console.ReadLine());
-        Card[] set2 = new Card[n2];
+        int secondCombLength = int.Parse(Console.ReadLine());
+        Card[] set2 = new Card[secondCombLength];
 
         Console.WriteLine("Enter the cards of the second set. (from 1 to 7) with color (R/O/Y/G/C/B/P) of the card:");
-        HintClass.Hint();
-        for (int i = 0; i < n2; i++)
+        for (int i = 0; i < secondCombLength; i++)
         {
+            HintClass.Hint();
             string cardString = Console.ReadLine();
             set2[i] = new Card(cardString);
         }
