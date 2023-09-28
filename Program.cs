@@ -169,7 +169,6 @@ class Program
     static void Main()
     {
         Console.WriteLine("Enter the size of the first combination (from 1 to 7):");
-        //int firstCombinationLength = int.Parse(Console.ReadLine());
         int firstCombLength = 0;
         firstCombLength = Card.CheckNumberInput(firstCombLength);
         Card[] set1 = new Card[firstCombLength];
