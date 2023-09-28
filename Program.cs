@@ -183,14 +183,15 @@ class Program
         }
 
         Console.WriteLine("Enter the size of the second combination (from 1 to 7):");
-        int secondCombLength = int.Parse(Console.ReadLine());
+        int secondCombLength = 0;
+        secondCombLength = Card.CheckNumberInput(secondCombLength);
         Card[] set2 = new Card[secondCombLength];
 
         Console.WriteLine("Enter the cards of the second set. (from 1 to 7) with color (R/O/Y/G/C/B/P) of the card:");
         for (int i = 0; i < secondCombLength; i++)
         {
-            HintClass.Hint();
-            string cardString = Console.ReadLine();
+            string cardString = "";
+            cardString = Card.CheckNumLet(cardString);
             set2[i] = new Card(cardString);
         }
 
